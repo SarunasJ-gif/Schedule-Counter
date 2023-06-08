@@ -35,10 +35,10 @@ public class StudentServiceImpl implements StudentService {
         int day = 24;
         int leisureHours = 17;
         while (totalHours >= 0) {
-            if (leisureHours <= 0) {
-                throw new NotEnoughTimeForTaskException("You have no enough time to finish project...");
-            }
             for (WorkingTime workingTime : workingTimes) {
+                if (leisureHours <= 0) {
+                    throw new NotEnoughTimeForTaskException("You have no enough time to finish project...");
+                }
                 int hourWorkPerDay = day - leisureHours - workingTime.getBusyHours();
                 if ((totalHours - hourWorkPerDay) <= 0) {
                     workingTime.setHours(workingTime.getHours() + totalHours);
